@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Nightfall Strike</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="game-shell">
+      <canvas id="gameCanvas"></canvas>
+
+      <div id="hud">
+        <div class="hud-card left">
+          <span class="label">Health</span>
+          <strong id="healthValue">100</strong>
+        </div>
+        <div class="hud-card center">
+          <span class="label">Wave</span>
+          <strong id="waveValue">1</strong>
+        </div>
+        <div class="hud-card right">
+          <span class="label">Score</span>
+          <strong id="scoreValue">0</strong>
+        </div>
+      </div>
+
+      <div id="startScreen" class="overlay visible">
+        <div class="panel">
+          <p class="eyebrow">Urban combat simulation</p>
+          <h1>Nightfall Strike</h1>
+          <p>Move with WASD or the virtual stick. Aim with the mouse or touch and hold click to fire.</p>
+          <button id="startButton">Deploy</button>
+        </div>
+      </div>
+
+      <div id="gameOver" class="overlay hidden">
+        <div class="panel">
+          <p class="eyebrow">Mission failed</p>
+          <h2>Operator down</h2>
+          <p id="finalScore">Score: 0</p>
+          <button id="restartButton">Retry</button>
+        </div>
+      </div>
+
+      <div id="touchControls" aria-label="Touch controls">
+        <div id="joystickBase">
+          <div id="joystickStick"></div>
+        </div>
+        <button id="fireButton" aria-label="Fire">FIRE</button>
+      </div>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
+</html>

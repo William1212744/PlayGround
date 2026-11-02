@@ -1,0 +1,222 @@
+:root {
+  --bg: #0a0f1a;
+  --bg-2: #111b2b;
+  --panel: rgba(10, 17, 28, 0.72);
+  --panel-strong: rgba(10, 17, 28, 0.9);
+  --orange: #ff9d51;
+  --orange-soft: #ffc074;
+  --red: #ff4e50;
+  --green: #7ef0b7;
+  --cyan: #69d1ff;
+  --white: #ecf6ff;
+  --shadow: rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(circle at top, #16263d, var(--bg) 50%);
+  color: var(--white);
+  font-family: Inter, "Segoe UI", sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+#game-shell {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #060c14;
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #0c1320 0%, #070d15 100%);
+  cursor: crosshair;
+}
+
+#hud {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  pointer-events: none;
+  padding: 18px 16px;
+}
+
+.hud-card {
+  min-width: 110px;
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 12px 30px var(--shadow);
+  backdrop-filter: blur(9px);
+  padding: 8px 14px;
+  text-align: center;
+}
+
+.hud-card .label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.hud-card strong {
+  font-size: clamp(18px, 3vw, 28px);
+  letter-spacing: 0.05em;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(2, 6, 12, 0.48);
+  backdrop-filter: blur(5px);
+  z-index: 10;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.panel {
+  width: min(440px, calc(100vw - 32px));
+  background: rgba(11, 18, 28, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  padding: 28px 22px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.42);
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--orange-soft);
+  font-size: 10px;
+  opacity: 0.9;
+}
+
+.panel h1,
+.panel h2 {
+  margin: 0 0 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.panel h1 {
+  font-size: clamp(34px, 7vw, 56px);
+}
+
+.panel h2 {
+  font-size: clamp(30px, 6vw, 46px);
+}
+
+.panel p {
+  margin: 0 0 20px;
+  line-height: 1.5;
+  color: rgba(236, 246, 255, 0.9);
+}
+
+button {
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--orange), #ff5e5b);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 15px 28px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 12px 25px rgba(255, 109, 68, 0.28);
+  transition: transform 0.15s ease;
+}
+
+button:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+#touchControls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 20px;
+  pointer-events: none;
+  z-index: 9;
+}
+
+#joystickBase {
+  position: relative;
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  background: rgba(18, 26, 34, 0.36);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 18px 25px rgba(0, 0, 0, 0.2);
+  pointer-events: auto;
+}
+
+#joystickStick {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(130, 215, 255, 0.68);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 10px 22px rgba(105, 209, 255, 0.35);
+}
+
+#fireButton {
+  width: 118px;
+  height: 118px;
+  border-radius: 50%;
+  font-size: 17px;
+  pointer-events: auto;
+  background: linear-gradient(135deg, #ff7633, #d8243d);
+}
+
+@media (pointer: fine) {
+  #touchControls {
+    display: none;
+  }
+}
+
+@media (pointer: coarse) {
+  #hud {
+    gap: 12px;
+    padding: 14px 12px;
+  }
+
+  .hud-card {
+    min-width: 90px;
+    padding: 8px 12px;
+  }
+}
